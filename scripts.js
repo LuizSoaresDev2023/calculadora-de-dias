@@ -51,19 +51,30 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Adiciona os event listeners para os campos relevantes
-  document
-    .getElementById("inputDataInicial")
-    .addEventListener("change", calcularLicenca);
-  document
-    .getElementById("inputNumeroDias")
-    .addEventListener("change", calcularLicenca);
+  var camposLicenca = ["inputDataInicial", "inputNumeroDias"];
+  var camposDiferencaDias = ["inputDataInicial2", "inputDataFinal2"];
 
-  document
-    .getElementById("inputDataInicial2")
-    .addEventListener("change", calcularDiferencaDias);
-  document
-    .getElementById("inputDataFinal2")
-    .addEventListener("change", calcularDiferencaDias);
+  camposLicenca.forEach(function (campo) {
+    var elemento = document.getElementById(campo);
+    elemento.addEventListener("change", calcularLicenca);
+    elemento.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault(); // Impede o comportamento padrão (recarregamento da página)
+        calcularLicenca();
+      }
+    });
+  });
+
+  camposDiferencaDias.forEach(function (campo) {
+    var elemento = document.getElementById(campo);
+    elemento.addEventListener("change", calcularDiferencaDias);
+    elemento.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault(); // Impede o comportamento padrão (recarregamento da página)
+        calcularDiferencaDias();
+      }
+    });
+  });
 });
 
 function validarNumeroDias(inputNumeroDias) {
