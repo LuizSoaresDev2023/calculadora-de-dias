@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="Calculadora de Dias de Licença/Outros desenvolvida para o RH SEMUS PMBR - 2024"
+    />
+    <meta name="author" content="Luiz Soares" />
+    <meta
+      name="keywords"
+      content="calculadora, calculadora de dias, semus, belford roxo"
+    />
+    <link rel="icon" href="img/calculadora_azul_64.png" type="image/png" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+
+    <!-- Minhas fontes importadas Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Meus estilos CSS -->
+    <!-- <link rel="stylesheet" href="styles.css" /> -->
+    <!-- <style>
+        * {
+            font-family: "Poppins", sans-serif !important;
+        }
+    </style> -->
+    <title>Calculadora de Dias</title>
+  </head>
+  <body>
+    <header>
+      <h1 class="bg-primary text-light h1 mt-2 p-2 pl-3">
+        Calculadora de Dias
+      </h1>
+    </header>
+
+    <main>
+      <section d-flex flex-column align-items-center>
+        <h4
+          class="alert alert-primary h4 mt-2 p-2 pl-3 text-center d-flex align-items-center"
+        >
+          Informe a Data Inicial e o Número de Dias:
+        </h4>
+        <form d-flex flex-column align-items-center>
+          <div class="form-row pl-3 mr-2 d-flex align-items-center">
+            <div class="form-group col-md-2 pl-1 pr-1">
+              <label for="inputDataInicial">Data Inicial:</label>
+              <input
+                type="date"
+                class="form-control text-center"
+                id="inputDataInicial"
+              />
+            </div>
+            <div class="form-group col-md-2 pl-1 pr-1">
+              <label for="inputNumeroDias">Número de Dias:</label>
+              <input
+                type="number"
+                class="form-control text-center"
+                id="inputNumeroDias"
+                placeholder="Dias"
+                step="1"
+                min="1"
+                oninput="validarNumeroDias(this)"
+              />
+              <small
+                id="mensagemErro"
+                class="text-sm d-block"
+                style="color: red"
+              ></small>
+            </div>
+            <div
+              class="form-group col-md-0 pl-3 pr-3 d-flex justify-content-center align-items-end"
+            >
+              <img src="img/seta_azul.png" class="img-fluid w-100" alt="seta" />
+            </div>
+
+            <div class="form-group col-md-2 pl-1 pr-1">
+              <label for="inputUltimoDia">Último dia da Licença:</label>
+              <input
+                type="date"
+                class="form-control text-center"
+                id="inputUltimoDia"
+                readonly
+              />
+            </div>
+            <div class="form-group col-md-2 pl-1 pr-1">
+              <label for="inputRetorno">Retorno às atividades em:</label>
+              <input
+                type="date"
+                class="form-control text-center"
+                id="inputRetorno"
+                readonly
+              />
+            </div>
+          </div>
+        </form>
+      </section>
+      <section d-flex flex-column align-items-center>
+        <h4
+          class="alert alert-primary h4 mt-2 p-2 pl-3 text-center d-flex align-items-center"
+        >
+          Informe a Data Final e a Data Inicial:
+        </h4>
+        <form d-flex flex-column align-items-center>
+          <div class="form-row pl-3 mr-2 d-flex align-items-center">
+            <div class="form-group col-md-2 pl-1 pr-1">
+              <label for="inputDataInicial2">Data Inicial:</label>
+              <input
+                type="date"
+                class="form-control text-center"
+                id="inputDataInicial2"
+              />
+            </div>
+            <div class="form-group col-md-2 pl-1 pr-1">
+              <label for="inputDataFinal2">Data Final:</label>
+              <input
+                type="date"
+                class="form-control text-center"
+                id="inputDataFinal2"
+              />
+            </div>
+            <div
+              class="form-group col-md-0 pl-3 pr-3 d-flex justify-content-center align-items-end"
+            >
+              <img src="img/seta_azul.png" class="img-fluid w-100" alt="seta" />
+            </div>
+
+            <div class="form-group col-md-2 pl-1 pr-1">
+              <label for="inputNumeroDias2">Número de Dias:</label>
+              <input
+                type="number"
+                class="form-control text-center"
+                id="inputNumeroDias2"
+                placeholder="Dias"
+                step="1"
+                min="0"
+                readonly
+              />
+            </div>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="mt-5">
+      <div>
+        <hr />
+      </div>
+      <div class="card text-center border-0 mt-1">
+        <div class="card-body mb-1">
+          <h5
+            class="card-title font-weight-light text-sm text-primary text-muted"
+          >
+            @Luiz Soares Dev 2024
+          </h5>
+          <p class="card-text small text-primary text-muted">
+            Desenvolvedor de Sistemas
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript (Opcional) -->
+    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Meus scripts js -->
+    <script src="scripts.js"></script>
+  </body>
+</html>
